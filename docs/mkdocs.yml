@@ -6,6 +6,8 @@ repo_url: https://github.com/theoria-project/theoria
 repo_name: theoria-project/theoria
 edit_uri: edit/main/docs/
 
+docs_dir: .
+
 theme:
   name: material
   language: en
