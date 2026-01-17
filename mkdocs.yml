@@ -1,0 +1,106 @@
+site_name: Theoria
+site_url: https://theoria-project.github.io/theoria
+site_description: Humanities research & LaTeX drafting agentic CLI
+site_author: Theoria Contributors
+repo_url: https://github.com/theoria-project/theoria
+repo_name: theoria-project/theoria
+edit_uri: edit/main/docs/
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Noto Sans
+    code: Fira Code
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.action.edit
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - i18n:
+      docs_structure: folder
+      fallback_to_default: true
+      reconfigure_material: true
+      reconfigure_search: true
+      languages:
+        - locale: en
+          default: true
+          name: English
+          build: true
+        - locale: ja
+          name: 日本語
+          build: true
+          nav_translations:
+            Home: ホーム
+            Getting Started: はじめに
+            Installation: インストール
+            Quick Start: クイックスタート
+            Configuration: 設定
+            Agents: エージェント
+            Theoretikos: テオレティコス
+            Bibliographos: ビブリオグラフォス
+            Graphos: グラフォス
+            CLI Reference: CLIリファレンス
+            Architecture: アーキテクチャ
+            Contributing: コントリビュート
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/theoria-project/theoria
+  generator: false
+
+nav:
+  - Home: index.md
+  - Getting Started:
+      - Installation: getting-started/installation.md
+      - Quick Start: getting-started/quickstart.md
+      - Configuration: getting-started/configuration.md
+  - Agents:
+      - Theoretikos: agents/theoretikos.md
+      - Bibliographos: agents/bibliographos.md
+      - Graphos: agents/graphos.md
+  - CLI Reference: cli.md
+  - Architecture: architecture.md
+  - Contributing: contributing.md
