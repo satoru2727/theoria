@@ -83,7 +83,7 @@ LaTeX 編集の本格サポート。
 - [x] **Testing** - テストカバレッジ向上
   - CLI integration tests
   - Agent behavior tests (mock LLM)
-- [ ] **Packaging** - 配布準備
+- [x] **Packaging** - 配布準備
   - PyPI 公開
   - Homebrew formula (optional)
 
