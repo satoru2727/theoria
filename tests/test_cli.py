@@ -1,6 +1,6 @@
 from typer.testing import CliRunner
 
-from theoria.cli import app
+from theoria.main import app
 
 
 def test_app_exists() -> None:

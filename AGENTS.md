@@ -12,7 +12,7 @@ Humanities research & LaTeX drafting agentic CLI. Python 3.11+ / LangGraph / Lit
 
 ```
 src/theoria/
-├── cli.py              # Entry point - Typer app, auth subcommands
+├── cli.py              # Entry point - Typer app, all CLI commands
 ├── agents/             # LangGraph agents (Theoretikos, Bibliographos, Graphos)
 │   ├── theoretikos.py  # Socratic dialogue - StateGraph with clarify/challenge/synthesize
 │   ├── bibliographos.py# Literature search, citation extraction
@@ -23,8 +23,8 @@ src/theoria/
 ├── config/             # Pydantic settings, YAML loader
 │   └── loader.py       # Config priority: env > project > global
 ├── providers/          # LiteLLM wrapper (LLMClient, Message)
-├── bibliography/       # BibTeX management
-├── latex/              # LaTeX editing utilities
+├── bibliography/       # BibTeX management (pybtex-based)
+├── latex/              # LaTeX utilities (parser, include resolver, label/ref checker)
 └── storage/            # SQLite for sessions, logs
 ```
 
@@ -38,6 +38,22 @@ src/theoria/
 | LLM call | `providers/__init__.py` | Use `LLMClient.complete()` or `.stream()` |
 | Config option | `config/loader.py` | Add to appropriate Pydantic model |
 | API key env var | `auth/store.py` | Add to `env_map` in `get_api_key_from_env()` |
+| LaTeX parsing | `latex/__init__.py` | `LatexParser`, `parse_document()` |
+| BibTeX operations | `bibliography/__init__.py` | `BibManager`, `parse_bibtex()` |
+
+## CLI Commands
+
+| Command | Description | Agent |
+|---------|-------------|-------|
+| `chat` | Socratic dialogue | Theoretikos |
+| `search` | Literature search | Bibliographos |
+| `edit` | LaTeX editing | Graphos |
+| `compile` | LaTeX compilation | - |
+| `check` | Label/ref integrity | - |
+| `cite` | Citation key search | - |
+| `init` | Project init | - |
+| `history` | Session history | - |
+| `auth *` | Auth management | - |
 
 ## Agent Architecture
 
@@ -97,6 +113,9 @@ pytest
 theoria --help
 theoria auth add openai --key ...
 theoria chat
+theoria edit document.tex
+theoria compile document.tex
+theoria check document.tex
 ```
 
 ## Auth Flow
@@ -114,6 +133,7 @@ Env var overrides stored auth. Mapping in `auth/store.py:env_map`.
 | Global | `~/.config/theoria/config.yaml` | 644 |
 | Auth | `~/.config/theoria/auth.json` | 600 |
 | Project | `./config.theoria.yaml` | 644 |
+| Sessions DB | `~/.config/theoria/sessions.db` | 644 |
 
 ## Testing
 
@@ -126,7 +146,12 @@ Env var overrides stored auth. Mapping in `auth/store.py:env_map`.
 
 See **[TODO.md](./TODO.md)** for the production roadmap.
 
-Current priority: **Phase 1 (Core CLI Experience)** - making `chat` command functional.
+**Completed:**
+- Phase 1: Core CLI Experience (chat, init, history, storage)
+- Phase 2: Research Workflow (search, cite, bibliography management)
+- Phase 3: LaTeX Integration (edit, compile, check, latex utilities)
+
+**Next:** Phase 4 (Advanced Features) - OAuth login, agent orchestration, export
 
 ## Documentation
 
@@ -156,5 +181,4 @@ uv run mkdocs build
 ## Notes
 
 - LiteLLM/LangGraph imports: `ignore_missing_imports = true` in mypy
-- SQLite storage in `storage/` - not yet implemented
 - OAuth flows in `auth/oauth.py` - CLI integration pending

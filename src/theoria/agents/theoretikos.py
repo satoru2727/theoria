@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING, Any, Literal, TypedDict, cast
 
 from langgraph.graph import END, StateGraph
 
+from theoria.cli.constants import OBJECTIONS_THRESHOLD
 from theoria.providers import LLMClient, Message
 
 if TYPE_CHECKING:
@@ -142,7 +143,7 @@ class Theoretikos:
         if state.get("phase") == "end":
             return "end"
         objections = state.get("objections", [])
-        if len(objections) >= 3:
+        if len(objections) >= OBJECTIONS_THRESHOLD:
             return "synthesize"
         return "challenge"
 

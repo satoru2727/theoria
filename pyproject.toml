@@ -48,6 +48,7 @@ dependencies = [
     "pydantic-settings>=2.0.0",
     "pyyaml>=6.0.0",
     "aiosqlite>=0.20.0",
+    "pybtex>=0.24.0",
 ]
 
 [project.optional-dependencies]
@@ -66,7 +67,7 @@ docs = [
 ]
 
 [project.scripts]
-theoria = "theoria.cli:app"
+theoria = "theoria.main:app"
 
 [project.urls]
 Repository = "https://github.com/theoria-project/theoria"
@@ -100,6 +101,7 @@ select = [
 ignore = [
     "PLR0913",  # Too many arguments
     "PLR2004",  # Magic value comparison
+    "TC003",    # Move stdlib import into type-checking block (false positive for dataclass fields)
 ]
 
 [tool.ruff.lint.isort]
@@ -125,6 +127,7 @@ ignore_missing_imports = false
 module = [
     "litellm.*",
     "langgraph.*",
+    "pybtex.*",
 ]
 ignore_missing_imports = true
 
