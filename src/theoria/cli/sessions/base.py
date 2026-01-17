@@ -8,6 +8,14 @@ from rich.panel import Panel
 from rich.table import Table
 
 from theoria.cli.display import GOODBYE_MSG
+from theoria.errors import (
+    LLMError,
+    NetworkError,
+    RateLimitError,
+    format_llm_error,
+    format_network_error,
+    format_rate_limit_error,
+)
 
 if TYPE_CHECKING:
     from theoria.config import Config
@@ -103,3 +111,9 @@ class BaseSession(ABC, Generic[StateT]):
             except EOFError:
                 console.print(f"\n{GOODBYE_MSG}")
                 break
+            except RateLimitError as e:
+                console.print(f"\n{format_rate_limit_error(e.retry_after)}\n")
+            except NetworkError as e:
+                console.print(f"\n{format_network_error(e)}\n")
+            except LLMError as e:
+                console.print(f"\n{format_llm_error(e)}\n")

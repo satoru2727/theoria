@@ -6,6 +6,16 @@ import sys
 from typing import TYPE_CHECKING, Any
 
 from theoria.cli.display import GOODBYE_MSG, INTERRUPTED_MSG
+from theoria.errors import (
+    AuthenticationError,
+    LLMError,
+    NetworkError,
+    RateLimitError,
+    format_auth_error,
+    format_llm_error,
+    format_network_error,
+    format_rate_limit_error,
+)
 
 if TYPE_CHECKING:
     from rich.console import Console
@@ -27,3 +37,15 @@ def run_session(session: BaseSession[Any], console: Console) -> None:
         asyncio.run(main())
     except KeyboardInterrupt:
         console.print(GOODBYE_MSG)
+    except AuthenticationError as e:
+        console.print(format_auth_error(e.provider))
+        sys.exit(1)
+    except RateLimitError as e:
+        console.print(format_rate_limit_error(e.retry_after))
+        sys.exit(1)
+    except NetworkError as e:
+        console.print(format_network_error(e))
+        sys.exit(1)
+    except LLMError as e:
+        console.print(format_llm_error(e))
+        sys.exit(1)

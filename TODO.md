@@ -72,7 +72,7 @@ LaTeX 編集の本格サポート。
 
 リリース準備。
 
-- [ ] **Error handling** - ユーザーフレンドリーなエラー
+- [x] **Error handling** - ユーザーフレンドリーなエラー
   - API key 未設定時の誘導
   - ネットワークエラーのリトライ
   - rate limit 対応
@@ -80,7 +80,7 @@ LaTeX 編集の本格サポート。
   - `mkdocs` でのサイト構築
   - Getting Started ガイド
   - Provider 別セットアップ手順
-- [ ] **Testing** - テストカバレッジ向上
+- [x] **Testing** - テストカバレッジ向上
   - CLI integration tests
   - Agent behavior tests (mock LLM)
 - [ ] **Packaging** - 配布準備
